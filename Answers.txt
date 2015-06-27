@@ -1,3 +1,5 @@
+aws bucket: denisvrdoljak-w205-asn2
+
 My acquisition code uses the streaming Tweepy API,
 searching for #Warriors OR #NBAFinals2015 (which
 I’ll call just “Finals” for simplicity).
