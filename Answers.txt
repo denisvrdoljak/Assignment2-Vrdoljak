@@ -1,0 +1,58 @@
+My acquisition code uses the streaming Tweepy API,
+searching for #Warriors OR #NBAFinals2015 (which
+I’ll call just “Finals” for simplicity).
+
+It is set to take in tweets, and dump one after another
+to a single file, up to 10k tweets. At 10k, or at a raised exception
+(error/interrupt), the acquisition program is set to close out the file
+and write to a new one.
+
+The keys/validation is imported by a “library” I wrote (called
+KeyChain).
+
+I intended to run the code, with three other implementations for only
+#Warriors, for only #NBAFinals2015, and for both tags (AND instead of OR)
+simultaneously for a week, but as it turned out due to glitches and API
+limitations (ie, only 1 channel per set of auth keys), the best
+implementation was the initial version. Due to a lot of “junk” (ie empy
+files due to a stopped stream) I used the best sample of tweets for
+my  NLP/NLTK analysis.
+
+My text analysis code opens the JSON file, parses through the tweets, taking
+into account an errant ‘\n’ between tweets, and pulls the tweet.text fields, aggregating
+them into three collections: warriors, finals, and both.
+
+Then, the code removes stop words, as defined in NLTK, and a second set of stop
+words which I defined, counts the words, and writes the results to 3 csv files:
+Wdict.csv (warriors), Fdict (Finals), and Tdict (both).
+
+The code also creates nltk text objects for each, but those aren’t used for
+the analysis.
+
+The analysis, done by hand based on the CSV output, is (in addition to the CSV’s)
+aggregated into Alldict.xls, along with histograms of the results. The data gives
+the top 50 words (post stop word removal), The graphs provide the top 20.
+
+An interesting feature is that “warriors” was the used word in all three cases.
+“Warriors” was typed more than NBAFinals2015, even among the group that used the
+NBAFinals2015 hashtag.
+
+cavs, cavaliers, lebron, and cleveland were used often, more so with the finals tag
+than the warriors tag, which I didn’t realize was the other team playing
+until seeing these results. (I’m clearly not an NBA fan!)
+
+Other key words were references to the game, tonight, lebron, the teams, and the
+number ‘6’, which ironically is (or was) lebron’s number, and there was some talk
+of him wanting ’23’ retired (Google search). (I’m not clear on what his number
+is now or was in the finals).
+
+Lastly, a url kept coming up, which I’d assume was a link to the game or score
+or something, though it wasn’t valid/active when I tried it.
+
+All in all, the basic NLP provided a huge amount of information.
+
+Again, results are aggregated (and sorted) in ALLdict.xls. Histograms on sheet 1
+(low res) and larger histograms (showing all top 25 words) on sheet 2.
+
+To cite properly, I used the version of my acquisition code which utilizes
+sample code from Tweepy (tweepy.org and github) and W205.
